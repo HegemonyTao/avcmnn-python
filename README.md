@@ -1,6 +1,6 @@
 # VCMNN and adaptive VCMNN (i.e., AVCMNN) algorithms implemented in python
 
-This project is implemented in python version of [An adaptive mutual K-nearest neighbors clustering algorithm based on maximizing mutual information]((https://www.sciencedirect.com/science/article/pii/S003132032200752X)) , and [the original project](https://github.com/mlyizhang/avcmnn) is implemented in matlab.
+This project is implemented in python version of [An adaptive mutual K-nearest neighbors clustering algorithm based on maximizing mutual information](https://www.sciencedirect.com/science/article/pii/S003132032200752X) , and [the original project](https://github.com/mlyizhang/avcmnn) is implemented in matlab.
 
 ## Install
 
