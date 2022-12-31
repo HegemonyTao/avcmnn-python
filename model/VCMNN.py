@@ -2,19 +2,22 @@ from tools.utils import *
 from scipy.spatial.distance import pdist
 from scipy.spatial.distance import squareform
 def VCMNN(data,k,num):
-    #caculate distance
+    #Calculate Euclidean distance between data points
     D=pdist(data)
     Simi=squareform(D)
     for i in range(Simi.shape[0]):
         Simi[i,i]=math.inf
+    #Get k nearest neighbors of each data point
     sdismat,index=newSort(Simi,axis=1)
     index=index[:,:k]
     ag=np.zeros(shape=(index.shape[0],index.shape[0]))
     for i in range(1,index.shape[0]):
         for j in range(i+1,index.shape[0]):
+            #Judge whether point_i and point_j are mutual k-nearest neighbors
             if find(index[j,:],i)!=[] and find(index[i,:],j)!=[]:
                 ag[i,j]=1
-    one=-1
+    one=0
+    #Classify data that are k-nearest neighbors
     idx=np.zeros((len(data),))
     for i in range(ag.shape[0]):
         for j in range(ag.shape[1]):
@@ -25,6 +28,7 @@ def VCMNN(data,k,num):
                 idx[j]=idx[i]
     idx=idx.T
     secidx=idx
+    #Count the number of different categories and sort them
     uidx=unique(idx)
     numIdx=np.zeros((len(uidx),))
     for i in range(len(uidx)):
@@ -34,12 +38,13 @@ def VCMNN(data,k,num):
     microidx2=index2[num:]
     for i in range(len(microidx2)):
         arowList=find(secidx,microidx2[i])
-        if arowList==[]:
-            continue
+        #Finding k-Nearest Neighbors of All Data Points in a Group
         a=secidx[unique(index[arowList,:k])]
+        #Remove the location of its own element
         a=np.delete(a,find(a,microidx2[i]),axis=0)
         if a==[]:
             continue
+        #Classify all data in a group in a minority group into a majority group
         uniqea=unique(a)
         cc=histcNoGraph(a,unique(a))
         if len(cc)==0:
