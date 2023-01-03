@@ -66,7 +66,7 @@ print('AVCMNN result:ARI={},NMI={}'.format(AR2,NMI2))
 
 ## Comparison with the algorithm performance in the paper
 
-<img src="C:\Users\18297\AppData\Roaming\Typora\typora-user-images\image-20230103173223451.png" alt="image-20230103173223451" style="zoom:125%;" />
 
 
+<img src=".\performance.png" alt="performance" style="zoom:125%;" />
 
