@@ -1,21 +1,17 @@
-from model.RandIndex import RandIndex
-from database import Database
 from model.VCMNN import VCMNN
 from model.AVCMNN import AVCMNN
-from model.nmi import nmi
+from tools.RandIndex import RandIndex
+from database import Database
 from tools.utils import *
-import warnings
-warnings.filterwarnings("ignore")
-X,y=Database.loadIris()
-k,num=25,3
-kstart,kend=20,50
-secidx=VCMNN(X,k,num)
-print(secidx)
-print(flatten(y))
-'''
-AR,RI,MI,HI=RandIndex(np.array(secidx),np.array(flatten(y)))
-NMI=nmi(np.array(secidx),np.array(flatten(y)))
-print('VCMNN result(k={0},num={1}): ARI={2:.4f}\tNMI={3:.4f}'.format(k,num,AR,NMI))
-fiannnmiindex,finalnmi,finalari=AVCMNN(X,y,kstart,kend)
-print('AVCMNN result(kstart={0},kend={1}): ARI={2:.4f}\tNMI={3:.4f}'.format(kstart,kend,finalari,finalnmi))
-'''
+from sklearn.metrics import normalized_mutual_info_score as nmi
+if __name__=='__main__':
+    X,y=Database.loadIris()
+    y=flatten(y)
+    vcmnnIdx=VCMNN(X,25,3)
+    AR1, RI1, MI1, HI1=RandIndex(vcmnnIdx,y)
+    NMI1=nmi(vcmnnIdx,y)
+    avcmnIdx,parameters=AVCMNN(X)
+    AR2, RI2, MI2, HI2=RandIndex(avcmnIdx,y)
+    NMI2=nmi(avcmnIdx,y)
+    print('VCMNN result:ARI={},NMI={}'.format(AR1,NMI1))
+    print('AVCMNN result:ARI={},NMI={}'.format(AR2,NMI2))

@@ -1,6 +1,6 @@
 # VCMNN and adaptive VCMNN (i.e., AVCMNN) algorithms implemented in python
 
-This project is implemented in python version of [An adaptive mutual K-nearest neighbors clustering algorithm based on maximizing mutual information](https://www.sciencedirect.com/science/article/pii/S003132032200752X) , and [the original project](https://github.com/mlyizhang/avcmnn) is implemented in matlab.
+This project is implemented in python version of [An adaptive mutual K-nearest neighbors clustering algorithm based on maximizing mutual information](https://www.sciencedirect.com/science/article/pii/S003132032200752X) .
 
 ## Install
 
@@ -26,50 +26,47 @@ Alternatively, you can use it in the root directory by following the steps below
 ### Import package and database
 
 ```python
-from model.RandIndex import RandIndex
-from database import Database
 from model.VCMNN import VCMNN
 from model.AVCMNN import AVCMNN
-from model.nmi import nmi
+from tools.RandIndex import RandIndex
+from database import Database
 from tools.utils import *
+from sklearn.metrics import normalized_mutual_info_score as nmi
 X,y=Database.loadIris()
+y=flatten(y)
 ```
 
 ### Clustering with VCMNN
 
 ```python
-k,num=25,3#Recommended value, can be set by yourself
-secidx=VCMNN(X,k,num)
+vcmnnIdx=VCMNN(X,25,3)#Recommended value, can be set by yourself
+AR1, RI1, MI1, HI1=RandIndex(vcmnnIdx,y)
 #Calculate ARI and NMI
-AR,RI,MI,HI=RandIndex(np.array(secidx),np.array(flatten(y)))
-NMI=nmi(np.array(secidx),np.array(flatten(y)))
-print('VCMNN result(k={0},num={1}): ARI={2:.4f}\tNMI={3:.4f}'.format(k,num,AR,NMI))
+NMI1=nmi(vcmnnIdx,y)
+print('VCMNN result:ARI={},NMI={}'.format(AR1,NMI1))
 ```
 
 ### Clustering with AVCMNN
 
 ```python
-kstart,kend=20,50 #Recommended value, can be set by yourself
-fiannnmiindex,finalnmi,finalari=AVCMNN(X,y,kstart,kend)
-print('AVCMNN result(kstart={0},kend={1}): ARI={2:.4f}\tNMI={3:.4f}'.format(kstart,kend,finalari,finalnmi))
+avcmnIdx,parameters=AVCMNN(X)
+AR2, RI2, MI2, HI2=RandIndex(avcmnIdx,y)
+NMI2=nmi(avcmnIdx,y)
+print('AVCMNN result:ARI={},NMI={}'.format(AR2,NMI2))
 ```
 
 ### Recommended parameters for different data sets
 
-| Datasets         | k    | num  |
-| ---------------- | ---- | ---- |
-| iris             | 25   | 3    |
-| ecoli            | 110  | 8    |
-| sonar            | 32   | 2    |
-| seeds            | 21   | 3    |
-| libras movements | 19   | 15   |
-| banknote         | 50   | 2    |
-| heart            | 31   | 2    |
-| yeast            | 50   | 8    |
-| wpbc             | 6    | 2    |
-| glass            | 69   | 6    |
+| Datasets | k    | num  |
+| -------- | ---- | ---- |
+| Iris     | 25   | 3    |
+| Heart    | 31   | 2    |
+| Glass    | 69   | 6    |
+| Sonar    | 32   | 2    |
 
+## Comparison with the algorithm performance in the paper
 
+<img src="C:\Users\18297\AppData\Roaming\Typora\typora-user-images\image-20230103173223451.png" alt="image-20230103173223451" style="zoom:125%;" />
 
 
 

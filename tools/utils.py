@@ -93,6 +93,13 @@ def intersect(array1,array2):
             if item1==item2 and item1 not in result:
                 result.append(item1)
     return result
+def union(array1,array2):
+    result=[]
+    for array in [array1,array2]:
+        for item in array:
+            if item not in result:
+                result.append(item)
+    return result
 #only for X are positive integers
 def tabulate(X):
     maxX=max(X)
