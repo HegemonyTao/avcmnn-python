@@ -66,7 +66,80 @@ print('AVCMNN result:ARI={},NMI={}'.format(AR2,NMI2))
 
 ## Comparison with the algorithm performance in the paper
 
+<table>
+   <tr>
+      <td>Datasets</td>
+      <td>KPI</td>
+      <td>VCMNN（paper）</td>
+      <td>AVCMNN（paper）</td>
+      <td>VCMNN（exp）</td>
+      <td>AVCMNN（exp）</td>
+   </tr>
+   <tr>
+      <td>Iris</td>
+      <td>ARI</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.9609</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>NMI</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.953</td>
+   </tr>
+   <tr>
+      <td>Heart</td>
+      <td>ARI</td>
+      <td>0.3085</td>
+      <td>0.1723</td>
+      <td>0.5899</td>
+      <td>0.2739</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>NMI</td>
+      <td>0.2661</td>
+      <td>0.2515</td>
+      <td>0.4866</td>
+      <td>0.2563</td>
+   </tr>
+   <tr>
+      <td>Glass</td>
+      <td>ARI</td>
+      <td>0.6757</td>
+      <td>0.3477</td>
+      <td>0.6882</td>
+      <td>0.2414</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>NMI</td>
+      <td>0.7587</td>
+      <td>0.5998</td>
+      <td>0.7636</td>
+      <td>0.4131</td>
+   </tr>
+   <tr>
+      <td>Sonar</td>
+      <td>ARI</td>
+      <td>0.3186</td>
+      <td>0.2876</td>
+      <td>0.297</td>
+      <td>0.0084</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>NMI</td>
+      <td>0.3732</td>
+      <td>0.3705</td>
+      <td>0.32493</td>
+      <td>0.015</td>
+   </tr>
+</table>
 
 
-<img src=".\performance.png" alt="performance" style="zoom:125%;" />
 
